@@ -15,7 +15,8 @@
             <v-text-field
               v-model="email"                   
               color="purple darken-2"
-              label="First name"
+              label="Email"
+              type="email"
               required
               class="login-page-text-field"
             ></v-text-field>
@@ -23,6 +24,7 @@
               v-model="password"          
               color="blue darken-2"
               label="Password"
+              type="password"
               required
                class="login-page-text-field"
             ></v-text-field>
@@ -71,6 +73,7 @@ export default {
                       this.$router.push({ name: "dashboard"});
                   }).catch((errors)=> {
                       console.log(errors)
+                      alert('Error Credentials')
                      
                   })
                         

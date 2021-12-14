@@ -3,6 +3,10 @@
     <div>
         
         <Sidebar/>
+        <v-app-bar app>
+            <v-spacer></v-spacer>
+            <Profile/>
+        </v-app-bar>
   
         <!-- <v-app-bar app>
         
@@ -18,10 +22,12 @@
 
 <script>
 import Sidebar from './Sidebar.vue'
+import Profile from './Profile.vue'
 
 export default {
     components: {
         Sidebar,
+        Profile
  
     }
 }

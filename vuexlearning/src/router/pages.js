@@ -1,14 +1,48 @@
-// import Home from '../views/Home.vue'
-// import About from '../views/About.vue'
-// import Login from '../views/Login.vue'
-// import Interface from '../../src/Interface.vue'
-// import Dashboard from '../components/dashboard/index.vue'
-// import Grades from '../components/grades/index.vue'
-// import Instructors from '../components/instructors/index.vue'
-// import Students from '../components/students/index.vue'
-// import Subject from '../components/subjects/index.vue'
+import Grades from '@/components/grades/index.vue'
+import Instructors from '@/components/instructors/index.vue'
+import Students from '@/components/students/index.vue'
+import Subject from '@/components/subjects/index.vue'
+import Announcements from '@/components/announcements/index.vue'
+import Dashboard from '@/components/dashboard/index.vue'
+
+export default [{
+
+        path: '/dashboard',
+        name: 'dashboard',
+        component: Dashboard,
+
+    },
+    {
+        path: '/grades',
+        name: 'grades',
+        component: Grades,
+    },
+    {
+        path: '/instructors',
+        name: 'instructors',
+        component: Instructors,
+    },
+    {
+        path: '/students',
+        name: 'students',
+        component: Students,
 
 
+    },
+    {
+        path: '/subjects',
+        name: 'subject',
+        component: Subject,
+
+    },
+    {
+        path: '/announcements',
+        name: 'announcements',
+        component: Announcements,
+
+
+    }
+]
 
 // export default [{
 //         path: '/home',

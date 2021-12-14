@@ -1,43 +1,18 @@
 <template>
-  <div>
-    <v-menu
-      button
-      offset-y
-      content-class="bubble-menu"
-      style="z-index:999"
-    >  
-   
-      <template v-slot:activator="{ on }">
-        <v-avatar
-          color="orange"
-          v-on="on"
-          class="clicker"
+  <div> 
+    <v-avatar
+  
+    
+      class="clicker"
+    >
+      <v-avatar size="43px">
+        <img
+          :alt="users.image"
+          :src="users.pic? users.pic : user_logo"
         >
-          <v-avatar size="49px">
-            <img
-              :alt="users.image"
-              :src="users.pic? users.pic : user_logo"
-            >
-          </v-avatar>
-        </v-avatar>
-      </template>
-      <v-list
-        dense
-        class="clicker"
-      >
-        <v-list-item
-          dense
-          class="text-capitalize"
-          
-        >edit profile</v-list-item>
-        <v-list-item
-          dense
-          class="text-capitalize"
-         
-        >logout</v-list-item>
-      </v-list>    
-    </v-menu>
-   
+      </v-avatar>
+    </v-avatar>
+
   </div>
 </template>
 <script>
