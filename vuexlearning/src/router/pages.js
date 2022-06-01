@@ -1,9 +1,17 @@
-import Grades from '@/components/grades/index.vue'
-import Instructors from '@/components/instructors/index.vue'
-import Students from '@/components/students/index.vue'
-import Subject from '@/components/subjects/index.vue'
-import Announcements from '@/components/announcements/index.vue'
+// import Grades from '@/components/grades/index.vue'
+// import Instructors from '@/components/instructors/index.vue'
+// import Students from '@/components/students/index.vue'
+// import Subject from '@/components/subjects/index.vue'
+
+
 import Dashboard from '@/components/dashboard/index.vue'
+import Employee from '@/components/employees/index.vue'
+import Department from '@/components/department/index.vue'
+import Attendance from '@/components/attendance/index.vue'
+import Leave from '@/components/leave/index.vue'
+import Announcements from '@/components/announcements/index.vue'
+
+
 
 export default [{
 
@@ -17,28 +25,42 @@ export default [{
 
     },
     {
-        path: '/grades',
-        name: 'grades',
-        component: Grades,
+        path: '/dashboard',
+        name: 'dashboard',
+        component: Dashboard,
         meta: { authOnly: true }
     },
+
     {
-        path: '/instructors',
-        name: 'instructors',
-        component: Instructors,
+        path: '/employee',
+        name: 'employee',
+        component: Employee,
         meta: { authOnly: true }
     },
+    
     {
-        path: '/students',
-        name: 'students',
-        component: Students,
+        path: '/department',
+        name: 'department',
+        component: Department,
+        meta: { authOnly: true }
+    },
+    // {
+    //     path: '/instructors',
+    //     name: 'instructors',
+    //     component: Instructors,
+    //     meta: { authOnly: true }
+    // },
+    {
+        path: '/attendance',
+        name: 'attendance',
+        component: Attendance,
         meta: { authOnly: true }
 
     },
     {
-        path: '/subjects',
-        name: 'subject',
-        component: Subject,
+        path: '/leave',
+        name: 'leave',
+        component: Leave,
         meta: { authOnly: true }
     },
     {

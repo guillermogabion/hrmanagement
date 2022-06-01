@@ -20,14 +20,14 @@
           >
           <v-img contain
             :src="logo"
-            size="1"
-            max-height="75"
-            max-width="150"
+            size="2"
+            max-height="90"
+            max-width="300"
             class="mx-auto"
             />
             <v-list
               dense
-       
+             
             >
             
             
@@ -48,16 +48,10 @@
             </v-list>
               <template v-slot:append>
                 <div class="pa-2">
-                    <template v-if="drawer">
-                        <v-btn icon @click.stop="logout()">
-                            <v-icon>mdi-logout-variant</v-icon>
-                        </v-btn>
-                    </template>
-                    <template v-else>
-                        <v-btn block @click.stop="logout">
+                    
+                    <v-btn block @click.stop="logout">
                           Logout
-                        </v-btn>
-                    </template>
+                    </v-btn>
                 </div>
             </template>
           </v-navigation-drawer>
@@ -86,10 +80,10 @@ import logo from '@/assets/images/logo.png'
           logo,
         items: [
           { title: 'Dashboard', icon: 'mdi-view-dashboard', url:"/dashboard" },
-          { title: 'Employees', icon: 'mdi-forum', url:'/students' },
-          { title: 'Instructors', icon: 'mdi-view-dashboard', url:'/instructors' },
-          { title: 'Subjects', icon: 'mdi-forum', url:'/subjects' },
-          { title: 'Grades', icon: 'mdi-view-dashboard', url:'/grades' },
+          { title: 'Employees', icon: 'mdi-forum', url:'/employee' },
+          { title: 'Department', icon: 'mdi-view-dashboard', url:'/department' },
+          { title: 'Attendance', icon: 'mdi-forum', url:'/attendance' },
+          { title: 'Leave Requests', icon: 'mdi-view-dashboard', url:'/leave' },
           { title: 'Announcements', icon: 'mdi-view-dashboard', url:'/announcements' },
          
         ],
@@ -104,3 +98,10 @@ import logo from '@/assets/images/logo.png'
     }
   }
 </script>
+
+<style>
+* {
+  margin-left : 0;
+  padding-top : 4em;
+}
+</style>

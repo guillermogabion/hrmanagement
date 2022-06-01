@@ -1,6 +1,6 @@
 <template>
 
-    <div>
+    <div id="app">
         
         <Sidebar/>
         <v-app-bar app>

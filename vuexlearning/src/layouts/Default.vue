@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div data-app>
         <!-- <app-confirm ref="app_confirm" /> -->
        <Base/>
   </div>

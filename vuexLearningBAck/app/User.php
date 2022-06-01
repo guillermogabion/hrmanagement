@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'profile_picture'
     ];
 
     /**
@@ -37,4 +37,17 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function profile_picture(){
+        return $this->hasOne(User::class);
+    }
+
+    public function getProfilePictureAttribute($value){
+       
+        if($value){
+            return asset('images/user_profile/'. $value);
+        }else {
+            return 'https://tnsleepteam.com/wp-content/uploads/2016/10/placeholder_profile_male.jpg' ;
+        }
+    }
 }
