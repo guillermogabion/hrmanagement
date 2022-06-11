@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Designation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserResource;
@@ -39,7 +40,7 @@ class UserController extends Controller
         $request->user()->tokem()->delete();
     }
     public function index(){
-        $employee = User::orderBy('created_at', 'desc')->get();
+        $employee = User::orderBy('created_at', 'desc')->paginate(5);
        return $employee;
     }
 
@@ -48,8 +49,26 @@ class UserController extends Controller
     }
 
     public function addEmployee(Request $request){
+
+        $request->validate([
+            'employee_id' => ['required','unique:users'],
+            'first_name'=> ['required'],
+            'last_name'=> ['required'],
+            'email'=> ['required','unique:users'],
+            'phone'=> ['required','unique:users'],
+            'password'=> ['required'], 
+        ]);
         $employee = new User;
-        $employee->name = $request->name;
+        $employee->employee_id = $request->employee_id;
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->mid_name = $request->mid_name;
+        $employee->birth_date = $request->birth_date;
+        $employee->address = $request->address;
+        $employee->phone = $request->phone;
+        $employee->person_to_contact = $request->person_to_contact;
+        $employee->to_contact_number = $request->to_contact_number;
+        $employee->user_type = '1';
         $employee->email = $request->email;
         $employee->password = Hash::make($request->input('password'));
         if($request->profile_picture){
@@ -66,11 +85,26 @@ class UserController extends Controller
     }
 
     public function editEmployee(Request $request, $id){
-    
+        $request->validate([
+            'employee_id' => ['required','unique:users'],
+            'first_name'=> ['required'],
+            'last_name'=> ['required'],
+            'email'=> ['required','unique:users'],
+            'phone'=> ['required','unique:users'],
+            'password'=> ['required'], 
+        ]);
         
         $employee = User::findorfail($id);
-
-        $employee->name = $request->name;
+        $employee->employee_id = $request->employee_id;
+        $employee->first_name = $request->first_name;
+        $employee->last_name = $request->last_name;
+        $employee->mid_name = $request->mid_name;
+        $employee->birth_date = $request->birth_date;
+        $employee->address = $request->address;
+        $employee->phone = $request->phone;
+        $employee->person_to_contact = $request->person_to_contact;
+        $employee->to_contact_number = $request->to_contact_number;
+        $employee->user_type = '1';
         $employee->email = $request->email;
         $employee->password = Hash::make($request->input('password'));
 
@@ -120,10 +154,30 @@ class UserController extends Controller
         if ($request->input('searchkey') != "") {
             $keyword = $request->input('searchkey');
             $user->where(function($query) use($keyword) {
-                $query   ->where('name', 'LIKE', "%$keyword%")
+                $query   ->where('first_name', 'LIKE', "%$keyword%")
+                         ->orWhere('last_name', 'LIKE', "%$keyword%")
                          ->orWhere('email', 'LIKE', "%$keyword%");
             });
         }
-        return $user->orderBy('name', 'asc')->get();
+        return $user->orderBy('first_name', 'asc')->get();
     }
+
+    public function pagination(Request $request){
+        $users = User::query();
+        if($request->input('keyword') != ""){
+            $keyword = $request->input('keyword');
+            $users->where(function($query) use($keyword){
+                $query  ->where('first_name', 'LIKE', "%$keyword%");
+            });
+        }
+        return $users->orderBy('first_name', 'asc')->paginate(10);
+    }
+
+    // public function design(){
+    //     $user = User::with('designation')->get();
+    //     $department = Designation::with('user_designation', 'department_designate')->get();
+    //     return $department;
+    // }
+
+    
 }

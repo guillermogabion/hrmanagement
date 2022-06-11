@@ -104,4 +104,10 @@ import logo from '@/assets/images/logo.png'
   margin-left : 0;
   padding-top : 4em;
 }
+
+.v-list-item--dense .v-list-item__content, .v-list--dense .v-list-item .v-list-item__content {
+  padding: 20px 0 !important;
+  padding-left: 10px !important;
+  font-size: 50px !important;
+}
 </style>

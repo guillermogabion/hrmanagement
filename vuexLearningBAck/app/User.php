@@ -41,6 +41,14 @@ class User extends Authenticatable
     public function profile_picture(){
         return $this->hasOne(User::class);
     }
+    public function designation(){
+        return $this->hasMany(Designation::class);
+    }
+
+    public function attendance(){
+        return $this->hasMany(Attendance::class, 'user_id');
+    }
+    
 
     public function getProfilePictureAttribute($value){
        

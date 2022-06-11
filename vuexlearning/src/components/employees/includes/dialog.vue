@@ -2,7 +2,7 @@
     <v-dialog
         v-model="dialog"
         persistent
-        width="30%"
+        width="50%"
     >
            
         <v-card>
@@ -15,51 +15,131 @@
                 v-model="valid"
                 class="padding"
             >
+            <v-row no-gutters>
+                <v-col md="6.5">
 
-             <v-flex xs12>
-                    <div class="js--image-preview" style="margin: auto; padding-left: 27%; ">
-                        <v-img
-                            
-                            style="width: 200px; height: 150px;"
-                            :src="payload.profile_picture || '/images/profile.jpg'"
-                        ></v-img>
-                    </div>
-                    <div class="upload-options" required style="padding-top: 5px;">
-                        <label>
-                            <input
-                                id="fileData"
-                                type="file"
-                                @change="onFileChange"
-                                style="padding-left: 20%;"
-                            />
-                        </label>
-                    </div>
-            </v-flex>
-            <v-flex xs12>
-                    <v-subheader class="px-0">Name</v-subheader>
-                    <v-text-field
-                    v-model = "payload.name"
-                    required
-                    :counter="10"
-                    :rules="nameRules"
-                    ></v-text-field>
-            </v-flex>
-            <v-flex xs12>
-                <v-subheader class="px-0">Email</v-subheader>
-                    <v-text-field
-                        :rules="emailRules"
-                        v-model = "payload.email"
-                        required
-                    ></v-text-field>
-            </v-flex>
-             <v-flex xs12>
-                <v-subheader class="px-0">Password</v-subheader>
-                    <v-text-field
-                        :rules="passwordRules"
-                        v-model = "payload.password"
-                        required
-                    ></v-text-field>
-            </v-flex>
+                    <v-flex xs12>
+                            <div class="js--image-preview" style="margin: auto; padding-left: 27%; ">
+                                <v-img
+                                    
+                                    style="width: 200px; height: 134px;"
+                                    :src="payload.profile_picture || '/images/profile.jpg'"
+                                ></v-img>
+                            </div>
+                            <div class="upload-options" required style="padding-top: 5px;">
+                                <label>
+                                    <input
+                                        id="fileData"
+                                        type="file"
+                                        @change="onFileChange"
+                                        style="padding-left: 20%;"
+                                    />
+                                </label>
+                            </div>
+                    </v-flex>
+                    <v-flex xs10>
+                            <v-subheader class="px-0 ma-0">Employee Number</v-subheader>
+                            <v-text-field
+                            v-model = "payload.employee_id"
+                            required
+                            :rules="lastnameRules"
+                            readonly
+                            ></v-text-field>
+                    </v-flex>
+                
+                    <v-flex xs10>
+                            <v-text-field
+                            v-model = "payload.last_name"
+                            label="Last Name"
+                            required
+                            :counter="20"
+                            :rules="lastnameRules"
+                            ></v-text-field>
+                    </v-flex>
+                    <v-flex xs10>
+                            <v-text-field
+                            label="First Name"
+                            v-model = "payload.first_name"
+                            required
+                            :counter="20"
+                            :rules="firstnameRules"
+                            ></v-text-field>
+                    </v-flex>
+                    
+                    <v-flex xs10>
+                            <v-text-field
+                            label="Middle Name"
+                            v-model = "payload.mid_name"
+                            required
+                            :counter="20"
+                            :rules="midnameRules"
+                            ></v-text-field>
+                    </v-flex>
+                </v-col>
+                <v-col md="6">
+                    <v-flex xs10>
+                            <v-text-field
+                             label="Birth Date"
+                            v-model = "payload.birth_date"
+                            required
+                            :counter="10"
+                            :rules="dateRules"
+                            ></v-text-field>
+                    </v-flex>
+                
+                    <v-flex xs10>
+                            <v-text-field
+                                 label="Address"
+                                :rules="addressRules"
+                                v-model = "payload.address"
+                                required
+                            ></v-text-field>
+                    </v-flex>
+                    <v-flex xs10>
+                            <v-text-field
+                             label="Contact Number"
+                                :rules="phoneRules"
+                                v-model = "payload.phone"
+                                :counter = "9"
+                                required
+                                type="number"
+                            ></v-text-field>
+                    </v-flex>
+                    
+                    <v-flex xs10>
+                            <v-text-field
+                                :rules="emailRules"
+                                label="Email"
+                                v-model = "payload.email"
+                                required
+                            ></v-text-field>
+                    </v-flex>
+                    <v-flex xs10>
+                            <v-text-field
+                                label="In Case of Emergency, Contact Person"
+                                v-model = "payload.person_to_contact"
+                                required
+                            ></v-text-field>
+                    </v-flex>
+                     <v-flex xs10>
+                            <v-text-field
+                                label="Contact Person Number"
+                                v-model = "payload.to_contact_number"
+                                required
+                            ></v-text-field>
+                    </v-flex>
+                    <v-flex xs10>
+                       
+                            <v-text-field
+                                label="Password"
+                                :rules="passwordRules"
+                                v-model = "payload.password"
+                                required
+                                type="password"
+                            ></v-text-field>
+                    </v-flex>
+                </v-col>
+            </v-row>    
             <v-card-actions>
                 <v-spacer></v-spacer>
                 <div style="padding-right: 2%;">
@@ -81,10 +161,12 @@
                         small
                         width="70px"
                         @click.prevent="$emit('close')"
+                        @click="reset()"
                     >
                         Close
                     </v-btn>
                 </div>
+                <v-spacer></v-spacer>
             </v-card-actions>
 
             
@@ -98,15 +180,38 @@
 <script>
 // import { ShowSmtp, UpdateSmtp, CreateSmtp } from "@api/smtp.api";
 
-// import axios from '@/plugins/axios';
 import { addEmployee } from '@/repositories/user.api';
 export default {
     data(){
         return {
             valid: true,
-             nameRules: [
-            v => !!v || 'Name is required',
-            v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+             firstnameRules: [
+            v => !!v || 'First Name is required',
+            v => (v && v.length <= 20) || 'First Name must be less than 20 characters',
+            ],
+            lastnameRules: [
+            v => !!v || 'Last Name is required',
+            v => (v && v.length <= 20) || 'Last Name must be less than 10 characters',
+            ],
+
+            midnameRules: [
+            v => !!v || 'Middle Name is required',
+            v => (v && v.length <= 20) || 'Middle Name must be less than 20 characters',
+            ],
+
+            dateRules: [
+            v => !!v || 'Birth Date is required',
+            // v => (v && v.length <= 20) || 'Birth Date must be less than 20 characters',
+            ],
+
+             addressRules: [
+            v => !!v || 'Address is required',
+            // v => (v && v.length <= 20) || 'Birth Date must be less than 20 characters',
+            ],
+
+            phoneRules: [
+            v => !!v || 'Phone is required',
+            v => (v && v.length <= 9) || 'Phone Number must be less than 9 characters',
             ],
             email: '',
             emailRules: [
@@ -118,11 +223,19 @@ export default {
                 v => (v && v.length >= 8) || 'Password must be less than 10 characters',
             ],
             payload:{
-                profile_picture: '',
-                name:'',
+                profile_picture:'',
+                employee_id: this.currentDate(),
+                first_name:'',
+                last_name:'',
+                mid_name:'',
+                birth_date:'',
+                address:'',
                 email:'',
-                password:'',
+                person_to_contact:'',
+                phone:'',
+                password:'password',
             },
+            // total: '',
         }
     },
    
@@ -153,9 +266,7 @@ export default {
         },
 
         addEmployee(){
-
-            
-
+            // this.payload.employee_id = this.count() && this.currentDate()
             let payload = this.payload
 
             if( this.$refs.form.validate()){
@@ -179,6 +290,19 @@ export default {
             this.payload.email = ''
             this.payload.password = ''
         },
+      
+        currentDate() {
+            const current = new Date();
+            const date = `${current.getDate()}${current.getMonth()+1}${current.getHours()}${current.getMinutes()}`;
+            return date;
+        },
+        reset(){
+             this.$refs.form.resetValidation()
+        }
+
+        // res(){
+        //   this.total;
+        // }
 
         
        
@@ -201,6 +325,5 @@ export default {
 }
 .padding {
     padding-left: 1em;
-    padding-right: 1em;
 }
 </style>
