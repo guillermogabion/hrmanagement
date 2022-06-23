@@ -9,7 +9,7 @@ export const editEmployee = (id, payload)=>axios.put(`editEmployee/${id}`, paylo
 export const editEmployeenoPic = (id, payload)=>axios.put(`editEmployeenoPic/${id}`, payload)
 export const deleteEmployee = (id)=>axios.delete(`deleteEmployee/${id}`)
 export const searchEmployee = (payload) => axios.post('searchEmployee', payload)
-
+export const scanEmployee = (payload) => axios.post('presented', payload)
 
 export const  EmployeePagination = (url,payload) => axios.get(`/${url}`, payload)
 // export const  AllEmployee = (url, purchase) => axios.get(`/${url}`,purchase)

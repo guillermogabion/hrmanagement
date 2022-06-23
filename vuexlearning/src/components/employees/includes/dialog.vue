@@ -19,34 +19,25 @@
                 <v-col md="6.5">
 
                     <v-flex xs12>
-                            <div class="js--image-preview" style="margin: auto; padding-left: 27%; ">
-                                <v-img
-                                    
-                                    style="width: 200px; height: 134px;"
-                                    :src="payload.profile_picture || '/images/profile.jpg'"
-                                ></v-img>
-                            </div>
-                            <div class="upload-options" required style="padding-top: 5px;">
-                                <label>
-                                    <input
-                                        id="fileData"
-                                        type="file"
-                                        @change="onFileChange"
-                                        style="padding-left: 20%;"
-                                    />
-                                </label>
-                            </div>
+                        <div class="js--image-preview" style="margin: auto; padding-left: 27%; ">
+                            <v-img
+                                
+                                style="width: 200px; height: 134px;"
+                                :src="payload.profile_picture || '/images/profile.jpg'"
+                            ></v-img>
+                        </div>
+                        <div class="upload-options" required style="padding-top: 5px;">
+                            <label>
+                                <input
+                                    id="fileData"
+                                    type="file"
+                                    @change="onFileChange"
+                                    style="padding-left: 20%;"
+                                />
+                            </label>
+                        </div>
                     </v-flex>
-                    <v-flex xs10>
-                            <v-subheader class="px-0 ma-0">Employee Number</v-subheader>
-                            <v-text-field
-                            v-model = "payload.employee_id"
-                            required
-                            :rules="lastnameRules"
-                            readonly
-                            ></v-text-field>
-                    </v-flex>
-                
+                  
                     <v-flex xs10>
                             <v-text-field
                             v-model = "payload.last_name"
@@ -224,7 +215,7 @@ export default {
             ],
             payload:{
                 profile_picture:'',
-                employee_id: this.currentDate(),
+              
                 first_name:'',
                 last_name:'',
                 mid_name:'',
@@ -300,12 +291,6 @@ export default {
              this.$refs.form.resetValidation()
         }
 
-        // res(){
-        //   this.total;
-        // }
-
-        
-       
     },
   
 

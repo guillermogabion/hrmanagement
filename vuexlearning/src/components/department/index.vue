@@ -34,6 +34,15 @@
                                     v-model="search"
                                     :items='department'
                                 ></v-text-field>
+                                <v-btn
+                                dark
+                                class="mb-5"
+                                @click="dialog = true"
+                                >
+                                <v-icon dark >
+                                    mdi-plus
+                                </v-icon>
+                                </v-btn>
                                     <v-divider
                                     class="mx-4"
                                     inset
@@ -100,6 +109,11 @@
                             </v-card-actions>
                         </v-card>
                     </v-dialog>
+                    <addDialog
+                    :dialog = "dialog"
+                    @close = "closeAdd()"
+                    >
+                    </addDialog>
                     </div>
                     </v-card>
         </v-container>
@@ -108,10 +122,15 @@
 
 <script>
 // import axios from '@/plugins/axios'
+import addDialog from './includes/add.vue'
 import { searchDepartment, departmentPagination } from '@/repositories/department.api'
 export default {
+    components : {
+        addDialog
+    },
     data (){
         return {
+            dialog: false,
             search: '',
             searchDesignation: '',
             dialogEdit: false,
@@ -189,25 +208,26 @@ export default {
         this.indexDepartment()
     },
 
-    
-
-   
-        indexDepartment() {
-          this.url = 'departmentPagination?page='+this.current_page+ '&keyword=' +this.search
-          if (this.timer) {
-            clearTimeout(this.timer);
-            this.timer = null;
-          }
-          this.timer = setTimeout(() => { 
-            departmentPagination(this.url).then(({data}) => {
-              console.log(this.url,"index")
-              this.set_data_fromServer(data)
-            })
-          }, 800);
-        },
-
-      
+    indexDepartment() {
+        this.url = 'departmentPagination?page='+this.current_page+ '&keyword=' +this.search
+        if (this.timer) {
+        clearTimeout(this.timer);
+        this.timer = null;
+        }
+        this.timer = setTimeout(() => { 
+        departmentPagination(this.url).then(({data}) => {
+            console.log(this.url,"index")
+            this.set_data_fromServer(data)
+        })
+        }, 800);
     },
+    closeAdd(){
+        this.indexDepartment()
+        this.dialog = false
+    },
+
+    
+},
    
 }
 </script>

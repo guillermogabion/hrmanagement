@@ -29,6 +29,7 @@
                 label="Search"
                 filled
                 rounded
+                readonly
                 dense
                 style="padding-top: 40px; padding-right: 10px;"
                 v-model="search"
@@ -279,7 +280,7 @@ import { EmployeePagination, editEmployee,editEmployeenoPic, deleteEmployee,sear
       return {
         employees: [],
         headers: [
-          { text: 'Employee Number', value: 'employee_id', align: 'start' },
+          { text: 'Employee Number', value: 'id', align: 'start' },
           { text: 'Last Name', value: 'last_name' },
           { text: 'First Name', value: 'first_name' },
           { text: 'Middle Name', value: 'mid_name' },

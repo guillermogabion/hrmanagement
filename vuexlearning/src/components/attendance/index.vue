@@ -60,8 +60,6 @@
                         </v-divider>
                     </v-toolbar>
                 </template>
-                    
-            
             </v-data-table>
             <v-pagination
             v-model="page"
@@ -72,12 +70,21 @@
             </div>
             </v-card>
         </v-container>
+        <addDialog
+        :dialog="dialog"
+        @close="closeAdd()"
+        ></addDialog>
     </div>
 </template>
 <script>
+import addDialog from './dialogs/add.vue'
+
 import axios from '@/plugins/axios'
 // import { attendancePagination } from '@/repositories/attendance.api'
 export default {
+     components : {
+      addDialog
+    },
     data () {
         return {
             date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
@@ -85,7 +92,7 @@ export default {
             modal: false,
             menu2: false,
             search: '',
-            dialog: '',
+            dialog: false,
             attendance: [],
             pageCount: 0,
             itemsPerPage:null,
@@ -96,8 +103,6 @@ export default {
                 { text: 'Employee ID', value: 'attendances.user_id', align: 'start'},
                 { text: 'Employee Last Name', value: 'users.last_name'},
                 { text: 'Date', value: 'created_at'},
-                // { text: 'Type', value:'type'},
-                // { text: 'Attendace Status', value:'status'}
             ],
 
         }
@@ -153,8 +158,6 @@ export default {
           })
       }
     },
-    mounted() {
-        this.searchAttendance();
-    },
+    
 }
 </script>
